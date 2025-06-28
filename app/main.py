@@ -5,29 +5,29 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import os
 
-# Carrega as variáveis do .env
+# Carregar variáveis de ambiente
 load_dotenv()
 
-# Cria cliente da OpenAI com a chave da API
+# Instanciar o cliente OpenAI
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-# Instancia o app FastAPI
+# Criar app FastAPI
 app = FastAPI()
 
-# Libera o CORS para permitir conexões do front-end (mesmo de outro domínio)
+# Liberar CORS para qualquer origem (ou especifique seu front)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Em produção, substitua pelo domínio específico
+    allow_origins=["*"],  # Ou troque por ["https://seufront.com"]
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Define o modelo esperado no body da requisição
+# Modelo da mensagem
 class Mensagem(BaseModel):
     mensagem: str
 
-# Rota principal que responde com a IA
+# Rota de resposta da IA
 @app.post("/pergunta")
 async def responder(mensagem: Mensagem):
     try:
