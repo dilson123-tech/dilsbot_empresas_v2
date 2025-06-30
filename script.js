@@ -9,7 +9,9 @@ form.addEventListener('submit', async (e) => {
   respostaDiv.innerHTML = "<em>🤖 Pensando...</em>";
 
   try {
-    const resposta = await fetch('https://SEU-BACKEND-DEPLOY.com/chat', {
+    const resposta = await fetch('https://dilsbot-api.up.railway.app/chat', {
+
+
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ mensagem })
