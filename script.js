@@ -6,15 +6,15 @@ form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const mensagem = document.getElementById('mensagem').value;
 
-  respostaDiv.innerHTML = "<em>🤖 Pensando...</em>";
+  respostaDiv.innerHTML = "<em>🤖 Pensando na melhor resposta pra sua empresa...</em>";
 
   try {
-    const resposta = await fetch('https://dilsbot-api.up.railway.app/chat', {
-
-
+    const resposta = await fetch('https://dilsbot-backend-production.up.railway.app/pergunta', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ mensagem })
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ mensagem }),
     });
 
     const data = await resposta.json();
@@ -25,6 +25,6 @@ form.addEventListener('submit', async (e) => {
 });
 
 limparBtn.addEventListener('click', () => {
-  respostaDiv.innerHTML = '';
   document.getElementById('mensagem').value = '';
+  respostaDiv.innerHTML = '';
 });
